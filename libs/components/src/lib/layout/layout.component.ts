@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {
+    NavigationEnd,
+    Router,
+    RouterLink,
+    RouterOutlet,
+} from '@angular/router';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatButton } from '@angular/material/button';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'lib-layout',
@@ -18,4 +24,14 @@ import { MatButton } from '@angular/material/button';
     templateUrl: './layout.component.html',
     styleUrl: './layout.component.css',
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+    route = inject(Router);
+    events = toSignal(this.route.events);
+    current = computed(() => {
+        if (!(this.events() instanceof NavigationEnd)) return '';
+        const step = (this.events() as unknown as NavigationEnd).url?.substring(
+            1
+        );
+        return step ? step : 'Home';
+    });
+}

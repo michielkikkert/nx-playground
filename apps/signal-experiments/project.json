@@ -30,12 +30,7 @@
           "@angular/material/prebuilt-themes/azure-blue.css",
           "apps/signal-experiments/src/styles.scss"
         ],
-        "scripts": [],
-        "server": "apps/signal-experiments/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/signal-experiments/src/server.ts"
-        },
-        "prerender": true
+        "scripts": []
       },
       "configurations": {
         "production": {

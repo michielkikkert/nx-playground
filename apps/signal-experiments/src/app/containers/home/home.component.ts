@@ -1,8 +1,9 @@
-import { Component, effect, model } from '@angular/core';
+import { Component, computed, effect, inject, Injector, linkedSignal, model, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { httpResource, HttpResourceRef } from '@angular/common/http';
 
 @Component({
     selector: 'app-home',
@@ -11,15 +12,29 @@ import { MatButton } from '@angular/material/button';
     styleUrl: './home.component.css',
 })
 export class HomeComponent {
+    injector = inject(Injector); // Needed for lazy httpResource
     toggle = model();
+    id = model(2);
+    requestId = linkedSignal<number, number | undefined>({
+        source: this.id,
+        computation: (newVal, previous) => {
+            if(!newVal) {
+                return previous?.value
+            }
+            return newVal;
+        }
+    });
+    eagerResource = httpResource(() => `https://jsonplaceholder.typicode.com/todos/${this.requestId()}`);
+    lazyResource: HttpResourceRef<any> | undefined;
+
+    loadResource() {
+        this.lazyResource = httpResource(() => `https://jsonplaceholder.typicode.com/users/${this.requestId()}`, {injector: this.injector});
+    }
 
     constructor() {
         effect(() => {
-            console.log(this.toggle());
-        });
-    }
-
-    flip() {
-        this.toggle.set(!this.toggle());
+            this.lazyResource?.value();
+            console.log('Load..', this.id())
+        })
     }
 }
