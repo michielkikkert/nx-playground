@@ -20,7 +20,7 @@ export class HomeComponent {
         computation: (newVal, previous) => {
             if(!newVal) {
                 // Why .value? even prevous.source works. I would expect new & prev to be same type here? Also, ? is needed here because... ? Why...?
-                // I must type the previous as undefined as well as otherwise TS is complaining? But how? previous is a signal so shpuld always have a value?
+                // I must type the previous as undefined as well as otherwise TS is complaining? But how? previous is a signal so should always have a value?
                 return previous?.value
             }
             // So I can just return newVal here.. not newVal.value like previous? Inconsistency is unexpected here?
