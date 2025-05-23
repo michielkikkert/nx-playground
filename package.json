@@ -2,7 +2,9 @@
   "name": "@nx-playground/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
