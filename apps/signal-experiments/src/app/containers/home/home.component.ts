@@ -5,6 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { httpResource, HttpResourceRef } from '@angular/common/http';
 
+
+// FIRST ATTEMPT
+// SEE STEP! for second attempt
+
 @Component({
     selector: 'app-home',
     imports: [CommonModule, MatSlideToggle, FormsModule, MatButton],
