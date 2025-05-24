@@ -23,9 +23,11 @@ export class HomeComponent {
         source: this.id,
         computation: (newVal, previous) => {
             if(!newVal) {
-                // Why .value? even prevous.source works. I would expect new & prev to be same type here? Also, ? is needed here because... ? Why...?
+                // Why .value? even prevous.source works. I would expect new & prev to be same type here (i.e. the unpacked value signal)? Also, ? is needed here because... ? Why...?
                 // I must type the previous as undefined as well as otherwise TS is complaining? But how? previous is a signal so should always have a value?
+                // I guess previous.value could be undefined on first emit - but why can previous itself be undefined?
                 return previous?.value
+                // return previous?.source also works..???
             }
             // So I can just return newVal here.. not newVal.value like previous? Inconsistency is unexpected here?
             return newVal;
