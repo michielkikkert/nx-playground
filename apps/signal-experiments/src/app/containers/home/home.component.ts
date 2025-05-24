@@ -16,7 +16,7 @@ import { httpResource, HttpResourceRef } from '@angular/common/http';
     styleUrl: './home.component.css',
 })
 export class HomeComponent {
-    injector = inject(Injector); // Needed for lazy httpResource
+    injector = inject(Injector); // Needed for lazy httpResource (unfortunately :-( )
     toggle = model();
     id = model(2);
     requestId = linkedSignal<number, number | undefined>({
