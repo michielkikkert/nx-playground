@@ -42,7 +42,7 @@ export class HomeComponent {
 
     constructor() {
         effect(() => {
-            this.lazyResource?.value(); // Will this throw in 20? If so - how should this effect work? Wrap it in an hasValue()? That seems like extra friction?
+            this.lazyResource?.value(); // Will this throw in 20? If so - how should this effect work? Wrap it in an hasValue()? That seems like unneeded friction?
             console.log('Load..', this.id())
         })
     }
